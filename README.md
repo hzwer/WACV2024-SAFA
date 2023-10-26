@@ -25,3 +25,8 @@ If you think this project is helpful, please feel free to leave a star or cite o
   year={2024}
 }
 ```
+## Reference
+
+[RIFE](https://github.com/megvii-research/ECCV2022-RIFE)   [DMVFN](https://huxiaotaostasy.github.io/DMVFN/)   [TMNet](https://github.com/CS-GangXu/TMNet)
+
+[VideoINR](https://github.com/Picsart-AI-Research/VideoINR-Continuous-Space-Time-Super-Resolution)   [ZoomingSlomo](https://github.com/Mukosame/Zooming-Slow-Mo-CVPR-2020)

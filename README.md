@@ -1,6 +1,6 @@
 # Scale-Adaptive Feature Aggregation for Efficient Space-Time Video Super-Resolution
 ## Introduction
-This project is the implement of [Scale-Adaptive Feature Aggregation for Efficient Space-Time Video Super-Resolution]().
+This project is the implement of [Scale-Adaptive Feature Aggregation for Efficient Space-Time Video Super-Resolution](). This project is still under construction. Some insights on multi-scale processing and feature fusion are reflected in RIFE applications, see [Practical-RIFE](https://github.com/hzwer/Practical-RIFE).
 
 ## Recommend
 We sincerely recommend some related papers:

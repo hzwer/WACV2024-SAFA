@@ -14,7 +14,7 @@ if torch.cuda.is_available():
 
 parser = argparse.ArgumentParser(description='STVSR for a pair of images')
 parser.add_argument('--img', dest='img', nargs=2, required=True)
-parser.add_argument('--exp', default=4, type=int)
+parser.add_argument('--exp', default=2, type=int)
 parser.add_argument('--ratio', default=0, type=float, help='inference ratio between two images with 0 - 1 range')
 parser.add_argument('--model', dest='modelDir', type=str, default='train_log', help='directory with trained model files')
 
@@ -51,14 +51,14 @@ img1 = F.pad(img1, padding)
 if args.ratio:
     print('ratio={}'.format(args.ratio))
     img_list = model.inference(img0, img1, timestep=args.ratio)
-    print(img_list[0].shape)
 else:
-    n = 2 ** args.exp - 1
-    tmp = [img0]
+    n = 2 ** args.exp - 1    
+    time_list = [0]
     for i in range(n):
-        tmp.append(model.inference(img0, img1, timestep=(i+1) * 1. / (n+1)))
-    tmp.append(img1)
-    img_list = tmp
+        time_list.append((i+1) * 1. / (n+1))
+    time_list.append(1)
+    print(time_list)
+    img_list = model.inference(img0, img1, timestep=time_list)
     
 if not os.path.exists('output'):
     os.mkdir('output')

@@ -83,12 +83,12 @@ class RecurrentBlock(nn.Module):
         return feat, convflow(feat) + flow, i0, i1, scale
 
 class Flownet(nn.Module):
-    def __init__(self, in_planes, c=64):
+    def __init__(self, block_num, c=64):
         super(Flownet, self).__init__()
         self.convimg = Head(c)
         self.shuffle = conv(2*c, c, 3, 1, 1, groups=1)
         self.convblock = torch.nn.ModuleList([])
-        self.dilated_para = [1, 1, 1, 1, 1, 1]
+        self.block_num = block_num
         self.convflow = nn.Sequential(
             nn.Conv2d(c, 4*6, 3, 1, 1),
             nn.PixelShuffle(2)
@@ -101,8 +101,8 @@ class Flownet(nn.Module):
             nn.Linear(c, 2),
             nn.Sigmoid()
         )
-        for i in range(len(self.dilated_para)):
-            self.convblock.append(RecurrentBlock(c, self.dilated_para[i], 2))
+        for i in range(self.block_num):
+            self.convblock.append(RecurrentBlock(c, 1, 2))
 
     def extract_feat(self, x):
         i0 = self.convimg(x[:, :3])
@@ -114,7 +114,7 @@ class Flownet(nn.Module):
         flow_list = []
         feat_list = []
         scale_list = []
-        for i in range(len(self.dilated_para)):
+        for i in range(self.block_num):
             feat, flow, w0, w1, scale = self.convblock[i](feat, i0, i1, flow, timestep, self.convflow, self.getscale)
             flow_list.append(flow)
             feat_list.append(feat)

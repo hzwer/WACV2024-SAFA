@@ -45,10 +45,7 @@ img0 = F.pad(img0, padding)
 img1 = F.pad(img1, padding)
 
 if args.ratio:
-    img_list = [img0]
-    middle = model.inference(img0, img1, timestep=args.ratio)
-    img_list.append(middle)
-    img_list.append(img1)
+    img_list = model.inference(img0, img1, timestep=args.ratio)
 else:
     n = 2 ** args.exp - 1
     tmp = [img0]

@@ -5,7 +5,7 @@ from torchvision import models
 from model.warplayer import warp
 from model.head import Head
 
-device = torch.device("cuda")
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 def conv(in_planes, out_planes, kernel_size=3, stride=1, padding=1, dilation=1, groups=1):
     return nn.Sequential(
@@ -121,9 +121,9 @@ class Flownet(nn.Module):
             scale_list.append(scale)
         return flow_list, feat_list, torch.cat(scale_list, 1)
         
-class FlownetCas(nn.Module):
+class SAFA(nn.Module):
     def __init__(self):
-        super(FlownetCas, self).__init__()
+        super(SAFA, self).__init__()
         c=80
         self.block = Flownet(6, c=c)
         self.lastconv = nn.Sequential(
@@ -145,8 +145,30 @@ class FlownetCas(nn.Module):
             nn.Conv2d(c//2, 12, 3, 1, 1),
             nn.PixelShuffle(2),
         )
-                                                    
-    def forward(self, x, lowres, timestep=0.5, training=False):
+
+    def inference(self, lowres, timestep=0.5):
+        if not torch.is_tensor(timestep):
+            timestep = torch.tensor(timestep).reshape(1, 1, 1, 1).repeat(img0.shape[0], 1, 1, 1).to(device)
+        timestep = timestep.repeat(1, 1, img0.shape[2], img0.shape[3])
+        timestep = F.interpolate(timestep, scale_factor=0.5, mode="bilinear")
+        one = 1-timestep*0
+        timestep_list = [one*0, timestep, one]
+        merged = []
+        for timestep in timestep_list:
+            flow_list, feat_list, soft_scale = self.block(i0, i1, feat, timestep, (lowres[:, :6] * 0).detach())
+            flow_sum = flow_list[-1]
+            warped_i0 = warp(img0, flow_sum[:, :2])
+            warped_i1 = warp(img1, flow_sum[:, 2:4])
+            mask = torch.sigmoid(flow_sum[:, 4:5])
+            warped = warped_i0 * mask + warped_i1 * (1 - mask)
+            flow_down = F.interpolate(flow_sum, scale_factor=0.5, mode="bilinear")
+            w0 = warp(i0, flow_down[:, :2] * 0.5)
+            w1 = warp(i1, flow_down[:, 2:4] * 0.5)
+            img = self.lastconv(torch.cat((timestep, w0, w1), 1))
+            merged.append(torch.clamp(warped + img, 0, 1))
+        return merged
+        
+    def forward(self, lowres, timestep=0.5, training=False):
         img0 = lowres[:, :3]
         img1 = lowres[:, -3:]
         if not torch.is_tensor(timestep):
@@ -154,14 +176,13 @@ class FlownetCas(nn.Module):
         timestep = timestep.repeat(1, 1, img0.shape[2], img0.shape[3])
         timestep = F.interpolate(timestep, scale_factor=0.5, mode="bilinear")
         one = 1-timestep*0
-        timestep_list = [timestep*0, one/8, one/8*2, one/8*3, one/8*4, one/8*5, one/8*6, one/8*7, 1-timestep*0]
+        timestep_list = [timestep*0, one/8, one/8*2, one/8*3, one/8*4, one/8*5, one/8*6, one/8*7, one]
         merged = []
         feat, i0, i1 = self.block.extract_feat(torch.cat((img0, img1), 1))
         feat_loss_sum = 0
         soft_scale_list = []
         for timestep in timestep_list:
-            flow_list = []
-            flow_list, feat_list, soft_scale = self.block(i0, i1, feat, timestep, (x[:, :6] * 0).detach())
+            flow_list, feat_list, soft_scale = self.block(i0, i1, feat, timestep, (lowres[:, :6] * 0).detach())
             soft_scale_list.append(soft_scale)
             flow_sum = flow_list[-1]
             warped_i0 = warp(img0, flow_sum[:, :2])

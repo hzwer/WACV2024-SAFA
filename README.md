@@ -28,4 +28,7 @@ If you think this project is helpful, please feel free to leave a star or cite o
 
 [RIFE](https://github.com/megvii-research/ECCV2022-RIFE)   [DMVFN](https://huxiaotaostasy.github.io/DMVFN/)   [TMNet](https://github.com/CS-GangXu/TMNet)
 
-[VideoINR](https://github.com/Picsart-AI-Research/VideoINR-Continuous-Space-Time-Super-Resolution)   [ZoomingSlomo](https://github.com/Mukosame/Zooming-Slow-Mo-CVPR-2020)
+[ZoomingSlomo](https://github.com/Mukosame/Zooming-Slow-Mo-CVPR-2020)    [VideoINR](https://github.com/Picsart-AI-Research/VideoINR-Continuous-Space-Time-Super-Resolution)   
+
+![image](https://github.com/megvii-research/WACV2024-SAFA/assets/10103856/d8b92072-bcf7-4d9d-bb27-26c07d85a154)
+

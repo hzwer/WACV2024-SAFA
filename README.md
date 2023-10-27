@@ -23,10 +23,14 @@ Download the pretrained model from [Google Drive](https://drive.google.com/file/
 
 **Image Interpolation**
 ```
-python3 inference_img.py --img demo/i0.png demo/i1.png --ratio=0.5
+python3 inference_img.py --img demo/i0.png demo/i1.png --exp=3
 ```
+(2^3=8X interpolation results)
 
-Other functions are still under construction.
+```
+python3 inference_img.py --img demo/i0.png demo/i1.png --ratio=0.4
+```
+(for an arbitrary timestep)
 
 ## Recommend
 We sincerely recommend some related papers:

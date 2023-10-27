@@ -6,7 +6,7 @@ This project is the implement of [Scale-Adaptive Feature Aggregation for Efficie
 
 Space-Time Super-Resolution: 
 
-![slomo_origin](https://github.com/megvii-research/WACV2024-SAFA/assets/10103856/aa9710a8-4b23-4c14-adaa-d864431faebd)![slomo](https://github.com/megvii-research/WACV2024-SAFA/assets/10103856/a902a134-5f3c-41a1-89a9-568be0973630)
+![slomo_origin](https://github.com/megvii-research/WACV2024-SAFA/assets/10103856/aa9710a8-4b23-4c14-adaa-d864431faebd) -> ![slomo](https://github.com/megvii-research/WACV2024-SAFA/assets/10103856/a902a134-5f3c-41a1-89a9-568be0973630)
 
 
 

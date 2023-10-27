@@ -2,7 +2,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 from torchvision import models
-from warplayer import *
+from model.warplayer import *
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 

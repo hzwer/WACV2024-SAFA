@@ -39,7 +39,7 @@ class Model:
         self.flownet.to(device)
 
     def inference(self, i0, i1, timestep):
-        return self.flownet(torch.cat((i0, i1), 1), timestep)
+        return self.flownet.inference(torch.cat((i0, i1), 1), timestep)
         
     def load_model(self, path, rank=0):
         def convert(param):

@@ -148,17 +148,18 @@ class SAFA(nn.Module):
 
     def inference(self, lowres, timestep=0.5):
         if not torch.is_tensor(timestep):
-            timestep = torch.tensor(timestep).reshape(1, 1, 1, 1).repeat(img0.shape[0], 1, 1, 1).to(device)
-        timestep = timestep.repeat(1, 1, img0.shape[2], img0.shape[3])
+            timestep = torch.tensor(timestep).reshape(1, 1, 1, 1).repeat(lowres.shape[0], 1, 1, 1).to(device)
+        timestep = timestep.repeat(1, 1, lowres.shape[2], lowres.shape[3])
         timestep = F.interpolate(timestep, scale_factor=0.5, mode="bilinear")
         one = 1-timestep*0
         timestep_list = [one*0, timestep, one]
         merged = []
+        feat, i0, i1 = self.block.extract_feat(lowres)
         for timestep in timestep_list:
             flow_list, feat_list, soft_scale = self.block(i0, i1, feat, timestep, (lowres[:, :6] * 0).detach())
             flow_sum = flow_list[-1]
-            warped_i0 = warp(img0, flow_sum[:, :2])
-            warped_i1 = warp(img1, flow_sum[:, 2:4])
+            warped_i0 = warp(lowres[:, :3], flow_sum[:, :2])
+            warped_i1 = warp(lowres[:, -3:], flow_sum[:, 2:4])
             mask = torch.sigmoid(flow_sum[:, 4:5])
             warped = warped_i0 * mask + warped_i1 * (1 - mask)
             flow_down = F.interpolate(flow_sum, scale_factor=0.5, mode="bilinear")

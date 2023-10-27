@@ -29,14 +29,18 @@ model.eval()
 if args.img[0].endswith('.exr') and args.img[1].endswith('.exr'):
     img0 = cv2.imread(args.img[0], cv2.IMREAD_COLOR | cv2.IMREAD_ANYDEPTH)
     img1 = cv2.imread(args.img[1], cv2.IMREAD_COLOR | cv2.IMREAD_ANYDEPTH)
+    img0 = cv2.resize(img0, (0, 0), fx=4, fy=4, interpolation=cv2.INTER_CUBIC)
+    img1 = cv2.resize(img1, (0, 0), fx=4, fy=4, interpolation=cv2.INTER_CUBIC)
     img0 = (torch.tensor(img0.transpose(2, 0, 1)).to(device)).unsqueeze(0)
     img1 = (torch.tensor(img1.transpose(2, 0, 1)).to(device)).unsqueeze(0)    
 else:
     img0 = cv2.imread(args.img[0], cv2.IMREAD_UNCHANGED)
     img1 = cv2.imread(args.img[1], cv2.IMREAD_UNCHANGED)
+    img0 = cv2.resize(img0, (0, 0), fx=4, fy=4, interpolation=cv2.INTER_CUBIC)
+    img1 = cv2.resize(img1, (0, 0), fx=4, fy=4, interpolation=cv2.INTER_CUBIC)
     img0 = (torch.tensor(img0.transpose(2, 0, 1)).to(device) / 255.).unsqueeze(0)
     img1 = (torch.tensor(img1.transpose(2, 0, 1)).to(device) / 255.).unsqueeze(0)
-
+    
 n, c, h, w = img0.shape
 ph = ((h - 1) // 32 + 1) * 32
 pw = ((w - 1) // 32 + 1) * 32
@@ -45,7 +49,9 @@ img0 = F.pad(img0, padding)
 img1 = F.pad(img1, padding)
 
 if args.ratio:
+    print('ratio={}'.format(args.ratio))
     img_list = model.inference(img0, img1, timestep=args.ratio)
+    print(img_list[0].shape)
 else:
     n = 2 ** args.exp - 1
     tmp = [img0]
@@ -53,7 +59,7 @@ else:
         tmp.append(model.inference(img0, img1, timestep=(i+1) * 1. / (n+1)))
     tmp.append(img1)
     img_list = tmp
-
+    
 if not os.path.exists('output'):
     os.mkdir('output')
 for i in range(len(img_list)):

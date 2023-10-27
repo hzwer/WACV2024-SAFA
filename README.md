@@ -41,7 +41,7 @@ If you think this project is helpful, please feel free to leave a star or cite o
 ```
 @inproceedings{huang2024safa,
   title={Scale-Adaptive Feature Aggregation for Efficient Space-Time Video Super-Resolution},
-  author={Huang, Zhewei and Huang, Ailin and Hu, Xiaotao and and Hu, Chen and Xu, Jun and Zhou, Shuchang},
+  author={Huang, Zhewei and Huang, Ailin and Hu, Xiaotao and Hu, Chen and Xu, Jun and Zhou, Shuchang},
   booktitle={Winter Conference on Applications of Computer Vision (WACV)},
   year={2024}
 }

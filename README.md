@@ -1,6 +1,7 @@
 # Scale-Adaptive Feature Aggregation for Efficient Space-Time Video Super-Resolution
+**This project is still under construction.**
 ## Introduction
-This project is the implement of [Scale-Adaptive Feature Aggregation for Efficient Space-Time Video Super-Resolution](http://arxiv.org/abs/2310.17294). This project is still under construction. Some insights on multi-scale processing and feature fusion are reflected in RIFE applications, see [Practical-RIFE](https://github.com/hzwer/Practical-RIFE). Our SAFA network outperforms recent state-of-the-art methods such as TMNet and VideoINR by an average improvement of over 0.5dB on PSNR, while requiring less than half the number of parameters and only 1/3 computational costs. -> [author website](https://github.com/hzwer)
+This project is the implement of [Scale-Adaptive Feature Aggregation for Efficient Space-Time Video Super-Resolution](http://arxiv.org/abs/2310.17294). Some insights on multi-scale processing and feature fusion are reflected in RIFE applications, see [Practical-RIFE](https://github.com/hzwer/Practical-RIFE). Our SAFA network outperforms recent state-of-the-art methods such as TMNet and VideoINR by an average improvement of over 0.5dB on PSNR, while requiring less than half the number of parameters and only 1/3 computational costs. -> [author website](https://github.com/hzwer)
 
 <img width="510" alt="image" src="https://github.com/megvii-research/WACV2024-SAFA/assets/10103856/a243c9e2-243e-4ce6-a5c0-3739d98eb22c">
 
@@ -16,12 +17,16 @@ cd WACV2024-SAFA
 pip3 install -r requirements.txt
 ```
 
+Download the pretrained model from [Google Drive](https://drive.google.com/file/d/1PCYRfKwMkymP0V5dmcmGwrKu0lU7xSZ0/view?usp=share_link).
+
 ### Run
 
 **Image Interpolation**
 ```
 python3 inference_img.py --img demo/i0.png demo/i1.png --ratio=0.5
 ```
+
+Other functions are still under construction.
 
 ## Recommend
 We sincerely recommend some related papers:

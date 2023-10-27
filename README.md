@@ -6,6 +6,23 @@ This project is the implement of [Scale-Adaptive Feature Aggregation for Efficie
 
 ## [Bilibili](https://www.bilibili.com/video/BV1X84y1R7Yw/) | [YouTube](https://youtu.be/rJyCT4C0FL4)
 
+## CLI Usage
+
+### Installation
+
+```
+git clone git@github.com:megvii-research/WACV2024-SAFA.git
+cd WACV2024-SAFA
+pip3 install -r requirements.txt
+```
+
+### Run
+
+**Image Interpolation**
+```
+python3 inference_img.py --img demo/i0.png demo/i1.png --ratio=0.5
+```
+
 ## Recommend
 We sincerely recommend some related papers:
 

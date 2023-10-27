@@ -1,6 +1,6 @@
 # Scale-Adaptive Feature Aggregation for Efficient Space-Time Video Super-Resolution
 ## Introduction
-This project is the implement of Scale-Adaptive Feature Aggregation for Efficient Space-Time Video Super-Resolution (under arxiv review). This project is still under construction. Some insights on multi-scale processing and feature fusion are reflected in RIFE applications, see [Practical-RIFE](https://github.com/hzwer/Practical-RIFE). Our SAFA network outperforms recent state-of-the-art methods such as TMNet and VideoINR by an average improvement of over 0.5dB on PSNR, while requiring less than half the number of parameters and only 1/3 computational costs. -> [author website](https://github.com/hzwer)
+This project is the implement of [Scale-Adaptive Feature Aggregation for Efficient Space-Time Video Super-Resolution](http://arxiv.org/abs/2310.17294). This project is still under construction. Some insights on multi-scale processing and feature fusion are reflected in RIFE applications, see [Practical-RIFE](https://github.com/hzwer/Practical-RIFE). Our SAFA network outperforms recent state-of-the-art methods such as TMNet and VideoINR by an average improvement of over 0.5dB on PSNR, while requiring less than half the number of parameters and only 1/3 computational costs. -> [author website](https://github.com/hzwer)
 
 <img width="510" alt="image" src="https://github.com/megvii-research/WACV2024-SAFA/assets/10103856/a243c9e2-243e-4ce6-a5c0-3739d98eb22c">
 

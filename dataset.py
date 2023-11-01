@@ -16,12 +16,6 @@ class AdobeDataset(Dataset):
         self.batch_size = batch_size
         self.dataset_name = dataset_name
         self.load_data()
-        self.nf = nori.Fetcher()
-        self.h = 256
-        self.w = 448
-        xx = np.arange(0, self.w).reshape(1,-1).repeat(self.h,0)
-        yy = np.arange(0, self.h).reshape(-1,1).repeat(self.w,1)
-        self.grid = np.stack((xx,yy),2).copy()
         self.allframe = True
 
     def __len__(self):

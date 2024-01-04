@@ -63,13 +63,13 @@ class RecurrentBlock(nn.Module):
         x = torch.cat((x, flow_down, i0, i1, timestep), 1)
         scale = RoundSTE.apply(getscale(x)).unsqueeze(2).unsqueeze(3)
         feat = 0
-        if scale.shape[0] != 1 or (scale[:, 0:1].mean() > 0.5 and scale[:, 1:2].mean() > 0.5):
+        if scale.shape[0] != 1 or (scale[:, 0:1].mean() >= 0.5 and scale[:, 1:2].mean() >= 0.5):
             x0 = self.conv_stem(x)
             for i in range(self.depth):
                 x0 = self.conv_backbone[i](x0)
             feat = feat + x0 * scale[:, 0:1] * scale[:, 1:2] 
 
-        if scale.shape[0] != 1 or (scale[:, 0:1].mean() < 0.5 and scale[:, 1:2].mean() > 0.5):
+        if scale.shape[0] != 1 or (scale[:, 0:1].mean() < 0.5 and scale[:, 1:2].mean() >= 0.5):
             x1 = self.conv_stem(F.interpolate(x, scale_factor=0.5, mode="bilinear"))
             for i in range(self.depth):
                 x1 = self.conv_backbone[i](x1)

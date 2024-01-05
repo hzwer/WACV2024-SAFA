@@ -1,9 +1,9 @@
 # Scale-Adaptive Feature Aggregation for Efficient Space-Time Video Super-Resolution
-## [YouTube](https://youtu.be/J4N75OJPGJc) | [Poster](https://drive.google.com/file/d/1kiBWp-qP2lCRIRxbmfOAVtnjleRF0ICq/view?usp=share_link) | [Enhancement Model](https://github.com/hzwer/Practical-RIFE/blob/main/README.md#video-enhancement) | [中文介绍](https://zhuanlan.zhihu.com/p/668775986)
+## [YouTube](https://youtu.be/J4N75OJPGJc) | [Poster](https://drive.google.com/file/d/1kiBWp-qP2lCRIRxbmfOAVtnjleRF0ICq/view?usp=share_link) | [Enhancement Model](https://github.com/hzwer/Practical-RIFE/blob/main/README.md#video-enhancement) | [demo](https://www.youtube.com/watch?v=QII2KQSBBwk) | [中文介绍](https://zhuanlan.zhihu.com/p/668775986)
 ## Introduction
 We want to increase video resolution and frame rates end-to-end (end-to-end STVSR). This project is the implement of [Scale-Adaptive Feature Aggregation for Efficient Space-Time Video Super-Resolution](http://arxiv.org/abs/2310.17294). Our SAFA network outperforms recent state-of-the-art methods such as TMNet and VideoINR by an average improvement of over 0.5dB on PSNR, while requiring less than half the number of parameters and only 1/3 computational costs. -> [author website](https://github.com/hzwer)
 
-We have released some dedicated visual effect models for ordinary users. Some insights on multi-scale processing and feature fusion are reflected in RIFE applications, see [Practical-RIFE](https://github.com/hzwer/Practical-RIFE). 
+We have released some dedicated visual effect models for ordinary users. Some insights on multi-scale processing and feature fusion are reflected in RIFE applications, see [Practical-RIFE]([https://github.com/hzwer/Practical-RIFE](https://github.com/hzwer/Practical-RIFE#video-enhancement)). 
 
 Space-Time Super-Resolution: 
 

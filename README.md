@@ -3,7 +3,7 @@
 ## Introduction
 We want to increase video resolution and frame rates end-to-end (end-to-end STVSR). This project is the implement of [Scale-Adaptive Feature Aggregation for Efficient Space-Time Video Super-Resolution](http://arxiv.org/abs/2310.17294). Our SAFA network outperforms recent state-of-the-art methods such as TMNet and VideoINR by an average improvement of over 0.5dB on PSNR, while requiring less than half the number of parameters and only 1/3 computational costs. -> [author website](https://github.com/hzwer)
 
-We plan to release a dedicated visual effect model for ordinary users as soon as possible, within two weeks. Some insights on multi-scale processing and feature fusion are reflected in RIFE applications, see [Practical-RIFE](https://github.com/hzwer/Practical-RIFE). 
+We have released some dedicated visual effect models for ordinary users. Some insights on multi-scale processing and feature fusion are reflected in RIFE applications, see [Practical-RIFE](https://github.com/hzwer/Practical-RIFE). 
 
 Space-Time Super-Resolution: 
 

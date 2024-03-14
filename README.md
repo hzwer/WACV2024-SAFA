@@ -36,6 +36,12 @@ python3 inference_img.py --img demo/i0.png demo/i1.png --ratio=0.4
 ```
 (for an arbitrary timestep)
 
+## Training and Reproduction
+We use 16 CPUs, 4 GPUs for training: 
+```
+python3 -m torch.distributed.launch --nproc_per_node=4 train.py --world_size=4
+```
+The training scheme is mainly adopted from [RIFE](https://github.com/megvii-research/ECCV2022-RIFE).
 ## Recommend
 We sincerely recommend some related papers:
 

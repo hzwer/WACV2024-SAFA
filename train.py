@@ -82,16 +82,12 @@ def train(model, local_rank):
                 writer.add_scalar('psnr', np.array(psnr_list).mean(), step)
             if step % 1000 == 1 and local_rank == 0:
                 gt = (gt.permute(0, 2, 3, 1).detach().cpu().numpy() * 255).astype('uint8')
-                mask = (torch.cat((info['mask'], info['mask_tea']), 3).permute(0, 2, 3, 1).detach().cpu().numpy() * 255).astype('uint8')
                 pred = (pred.permute(0, 2, 3, 1).detach().cpu().numpy() * 255).astype('uint8')
-                merged_img = (info['merged_tea'].permute(0, 2, 3, 1).detach().cpu().numpy() * 255).astype('uint8')
-                flow0 = info['flow'].permute(0, 2, 3, 1).detach().cpu().numpy()
-                flow1 = info['flow_tea'].permute(0, 2, 3, 1).detach().cpu().numpy()
+                flow = info['flow'].permute(0, 2, 3, 1).detach().cpu().numpy()
                 for i in range(5):
-                    imgs = np.concatenate((merged_img[i], pred[i], gt[i]), 1)[:, :, ::-1]
+                    imgs = np.concatenate((pred[i], gt[i]), 1)[:, :, ::-1]
                     writer.add_image(str(i) + '/img', imgs, step, dataformats='HWC')
-                    writer.add_image(str(i) + '/flow', np.concatenate((flow2rgb(flow0[i]), flow2rgb(flow1[i])), 1), step, dataformats='HWC')
-                    writer.add_image(str(i) + '/mask', mask[i], step, dataformats='HWC')
+                    writer.add_image(str(i) + '/flow', flow2rgb(flow[i]), step, dataformats='HWC')
                 writer.flush()
             if local_rank == 0:
                 print('epoch:{} {}/{} time:{:.2f}+{:.2f} loss_l1:{:.4e}'.format(epoch, i, args.step_per_epoch, data_time_interval, train_time_interval, info['loss_l1']))

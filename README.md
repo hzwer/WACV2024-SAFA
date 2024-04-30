@@ -42,6 +42,9 @@ We use 16 CPUs, 4 GPUs for training:
 python3 -m torch.distributed.launch --nproc_per_node=4 train.py --world_size=4
 ```
 The training scheme is mainly adopted from [RIFE](https://github.com/megvii-research/ECCV2022-RIFE).
+
+![image](https://github.com/hzwer/WACV2024-SAFA/assets/10103856/be0c151d-f8a3-465c-ac78-45d688a31c70) ![image](https://github.com/hzwer/WACV2024-SAFA/assets/10103856/246ba74f-44fd-4001-8375-bb41e9adbcad)
+
 ## Recommend
 We sincerely recommend some related papers:
 

@@ -18,6 +18,18 @@ device = torch.device("cuda")
 
 log_path = 'train_log'
 
+def rgb2y(img: torch.Tensor) -> torch.Tensor:
+    RGB2YCBCR_MAT = torch.Tensor([
+        [65.481, -37.797, 112.0],
+        [128.553, -74.203, -93.786],
+        [24.966, 112.0, -18.214]
+    ]) / 255.
+    RGB2YCBCR_BIAS = torch.Tensor([16, 128, 128]) / 255.
+    out_img = torch.mm(img.reshape(-1, 3), RGB2YCBCR_MAT[:, 0:1].to(img.device)) + RGB2YCBCR_BIAS[0].to(img.device)
+    size = list(img.size())
+    size[-1] = 1
+    return out_img.reshape(size)
+
 def get_learning_rate(step):
     if step < 2000:
         mul = step / 2000.
